@@ -524,3 +524,61 @@ textarea { min-height: 90px; resize: vertical; }
 .modal-overlay[hidden] {
   display: none !important;
 }
+/* ===== SCOREBADHAO PHASE 2.2 ADMIN QUESTION MANAGER PATCH ===== */
+
+.admin-tabs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.admin-tab {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  border-radius: 999px;
+  padding: 11px 14px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.admin-tab.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.admin-panel { display: none; }
+.admin-panel.active { display: block; }
+
+.compact-grid { gap: 12px; }
+
+.admin-note {
+  margin-top: 18px;
+  border: 1px solid var(--border);
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 14px;
+}
+
+.draft-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.draft-card {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #fff;
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.draft-card p { margin: 6px 0; }
+
+@media (max-width: 820px) {
+  .admin-tabs { display: grid; grid-template-columns: 1fr 1fr; }
+}
