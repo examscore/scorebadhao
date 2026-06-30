@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScoreBadhao Admin</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+  <div id="toastRoot" class="toast-root"></div>
+
+  <header class="topbar">
+    <div>
+      <h1>ScoreBadhao Admin</h1>
+      <p>Question manager, PDF/AI import, packages and analytics.</p>
+    </div>
+    <a class="btn ghost" href="index.html">Student Site</a>
+  </header>
+
+  <main class="app-shell">
+    <section id="adminLoginView" class="view active">
+      <div class="card narrow">
+        <h2>Admin Login</h2>
+        <label>Email</label>
+        <input id="adminEmail" placeholder="Admin email" />
+        <label>Password</label>
+        <input id="adminPassword" type="password" placeholder="Admin password" />
+        <button class="btn primary full" id="btnAdminLogin">Login</button>
+      </div>
+    </section>
+
+    <section id="adminDashboardView" class="view">
+      <div class="section-head">
+        <h2>Admin Dashboard</h2>
+        <p>AI questions always go to draft review first. No direct publish.</p>
+      </div>
+
+      <div class="grid two">
+        <div class="card">
+          <h3>Add Question Manually</h3>
+          <label>Board Code</label><input id="qBoard" placeholder="GOVT" />
+          <label>Subject Code</label><input id="qSubject" placeholder="POLITY" />
+          <label>Topic Code</label><input id="qTopic" placeholder="FR" />
+          <label>Difficulty</label>
+          <select id="qLevel"><option>E</option><option>M</option><option>H</option></select>
+          <label>Question</label><textarea id="qText"></textarea>
+          <label>Option A</label><input id="qA" />
+          <label>Option B</label><input id="qB" />
+          <label>Option C</label><input id="qC" />
+          <label>Option D</label><input id="qD" />
+          <label>Correct Answer</label><input id="qAnswer" placeholder="A/B/C/D" />
+          <label>Explanation</label><textarea id="qExplanation"></textarea>
+          <button class="btn primary full" id="btnSaveQuestion">Save Question</button>
+        </div>
+
+        <div class="card">
+          <h3>AI / Bulk Draft Import</h3>
+          <p class="muted">Paste extracted questions as JSON array for now. PDF/AI parser will be connected in Phase 3.</p>
+          <textarea id="draftJson" class="large-text" placeholder='[{"Question":"...","A":"...","B":"...","C":"...","D":"...","Answer":"A"}]'></textarea>
+          <button class="btn secondary full" id="btnSaveDrafts">Save to DRAFT_QUESTIONS</button>
+          <button class="btn ghost full" id="btnLoadDrafts">Load Drafts</button>
+          <div id="draftList" class="list"></div>
+        </div>
+
+        <div class="card">
+          <h3>Packages</h3>
+          <button class="btn secondary" id="btnLoadPackages">Load Packages</button>
+          <div id="packageList" class="list"></div>
+        </div>
+
+        <div class="card">
+          <h3>System Status</h3>
+          <button class="btn ghost" id="btnPingApi">Ping API</button>
+          <pre id="adminStatus" class="status-box"></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/toast.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/router.js"></script>
+  <script src="assets/js/admin.js"></script>
+  <script src="assets/js/question_manager.js"></script>
+  <script src="assets/js/pdf_import.js"></script>
+  <script src="assets/js/ai_import.js"></script>
+  <script src="assets/js/payment.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScoreBadhao</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+  <div id="toastRoot" class="toast-root"></div>
+
+  <header class="topbar">
+    <div>
+      <h1>ScoreBadhao</h1>
+      <p>Gujarat Government Exam MCQ Practice Platform</p>
+    </div>
+    <div class="top-actions">
+      <button class="btn ghost" id="btnStudentLogout" hidden>Logout</button>
+      <a class="btn admin-link" href="admin.html">Admin</a>
+    </div>
+  </header>
+
+  <main id="app" class="app-shell">
+    <section id="homeView" class="view active">
+      <div class="hero-card">
+        <span class="badge">Premium MCQ Platform</span>
+        <h2>Prepare smarter for GPSC, GSSSB, Talati, Police, PSI and more.</h2>
+        <p>Practice MCQs, previous papers, get analytics, and improve your rank readiness.</p>
+        <div class="hero-actions">
+          <button class="btn primary" data-route="loginView">Student Login</button>
+          <button class="btn secondary" data-route="registerView">Register</button>
+          <button class="btn ghost" data-route="examView">Explore Tests</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="loginView" class="view">
+      <div class="card narrow">
+        <h2>Student Login</h2>
+        <label>Phone</label>
+        <input id="loginPhone" placeholder="Enter phone number" />
+        <label>Password</label>
+        <input id="loginPassword" type="password" placeholder="Enter password" />
+        <button class="btn primary full" id="btnStudentLogin">Login</button>
+        <button class="link-btn" data-route="registerView">Create new account</button>
+      </div>
+    </section>
+
+    <section id="registerView" class="view">
+      <div class="card narrow">
+        <h2>Student Register</h2>
+        <label>Name</label>
+        <input id="regName" placeholder="Full name" />
+        <label>Phone</label>
+        <input id="regPhone" placeholder="Phone number" />
+        <label>Email</label>
+        <input id="regEmail" placeholder="Email optional" />
+        <label>Password</label>
+        <input id="regPassword" type="password" placeholder="Create password" />
+        <button class="btn primary full" id="btnStudentRegister">Register</button>
+        <button class="link-btn" data-route="loginView">Already registered? Login</button>
+      </div>
+    </section>
+
+    <section id="examView" class="view">
+      <div class="section-head">
+        <h2>Select Exam Path</h2>
+        <p>Everything loads dynamically from ScoreBadhao API.</p>
+      </div>
+
+      <div class="grid two">
+        <div class="card">
+          <h3>1. Board / Category</h3>
+          <div id="boardList" class="list skeleton-box">Loading boards...</div>
+        </div>
+        <div class="card">
+          <h3>2. Exam</h3>
+          <div id="examList" class="list muted">Select board first</div>
+        </div>
+        <div class="card">
+          <h3>3. Subject</h3>
+          <div id="subjectList" class="list muted">Select exam first</div>
+        </div>
+        <div class="card">
+          <h3>4. Topic</h3>
+          <div id="topicList" class="list muted">Select subject first</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Available Tests</h3>
+        <div id="testList" class="test-list muted">Select topic to load tests</div>
+      </div>
+    </section>
+
+    <section id="testView" class="view">
+      <div class="exam-toolbar">
+        <div>
+          <h2 id="testTitle">Test</h2>
+          <p id="testMeta">Loading...</p>
+        </div>
+        <div class="timer" id="timerBox">00:00</div>
+      </div>
+
+      <div class="exam-layout">
+        <div class="question-card">
+          <div id="questionBox"></div>
+          <div class="answer-actions">
+            <button class="btn secondary" id="btnPrev">Previous</button>
+            <button class="btn ghost" id="btnBookmark">Bookmark</button>
+            <button class="btn ghost" id="btnReview">Mark Review</button>
+            <button class="btn secondary" id="btnNext">Next</button>
+          </div>
+          <button class="btn danger full" id="btnSubmitTest">Submit Test</button>
+        </div>
+        <aside class="palette-card">
+          <h3>Question Palette</h3>
+          <div id="questionPalette" class="palette"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="resultView" class="view">
+      <div class="card">
+        <h2>Result</h2>
+        <div id="resultBox"></div>
+        <button class="btn primary" data-route="examView">Practice More</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/toast.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/router.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/student.js"></script>
+  <script src="assets/js/test_engine.js"></script>
+  <script src="assets/js/analytics.js"></script>
+  <script src="assets/js/rank_engine.js"></script>
+</body>
+</html>
