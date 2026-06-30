@@ -12,7 +12,9 @@ const AdminApp = (() => {
       admin = data.admin;
       Toast.success("Admin login successful");
       Router.show("adminDashboardView");
-      if (window.QuestionManager && QuestionManager.init) QuestionManager.init();
+      if (typeof QuestionManager !== "undefined" &&
+    QuestionManager.init) QuestionManager
+    .init();
     } catch (err) { Toast.error(err.message); }
   }
   async function ping() {
