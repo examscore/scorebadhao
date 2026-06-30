@@ -520,3 +520,7 @@ textarea { min-height: 90px; resize: vertical; }
     flex-direction: column;
   }
 }
+/* FIX: hide submit modal properly */
+.modal-overlay[hidden] {
+  display: none !important;
+}
