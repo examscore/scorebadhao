@@ -212,4 +212,4 @@ const QuestionManager = (() => {
 
   return { init, loadDrafts };
 })();
-                   
+window.QuestionManager = QuestionManager;                 
