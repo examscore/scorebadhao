@@ -8,12 +8,8 @@
 </head>
 <body>
   <div id="toastRoot" class="toast-root"></div>
-
   <header class="topbar">
-    <div>
-      <h1>ScoreBadhao Admin</h1>
-      <p>Question manager, PDF/AI import, packages and analytics.</p>
-    </div>
+    <div><h1>ScoreBadhao Admin</h1><p>Question manager, AI draft review, packages and analytics.</p></div>
     <a class="btn ghost" href="index.html">Student Site</a>
   </header>
 
@@ -21,10 +17,8 @@
     <section id="adminLoginView" class="view active">
       <div class="card narrow">
         <h2>Admin Login</h2>
-        <label>Email</label>
-        <input id="adminEmail" placeholder="Admin email" />
-        <label>Password</label>
-        <input id="adminPassword" type="password" placeholder="Admin password" />
+        <label>Email</label><input id="adminEmail" placeholder="Admin email" />
+        <label>Password</label><input id="adminPassword" type="password" placeholder="Admin password" />
         <button class="btn primary full" id="btnAdminLogin">Login</button>
       </div>
     </section>
@@ -32,48 +26,76 @@
     <section id="adminDashboardView" class="view">
       <div class="section-head">
         <h2>Admin Dashboard</h2>
-        <p>AI questions always go to draft review first. No direct publish.</p>
+        <p>Questions are saved using real database IDs. AI questions must go to draft review first.</p>
       </div>
 
-      <div class="grid two">
-        <div class="card">
-          <h3>Add Question Manually</h3>
-          <label>Board ID</label><input id="qBoard" placeholder="BRD-0001" />
-          <label>Subject ID</label><input id="qSubject" placeholder="SUB-0001" />
-          <label>Topic ID</label><input id="qTopic" placeholder="TPC-0001" />
-          <label>Difficulty</label>
-          <select id="qLevel"><option>E</option><option>M</option><option>H</option></select>
-          <label>Question</label><textarea id="qText"></textarea>
-          <label>Option A</label><input id="qA" />
-          <label>Option B</label><input id="qB" />
-          <label>Option C</label><input id="qC" />
-          <label>Option D</label><input id="qD" />
-          <label>Correct Answer</label><input id="qAnswer" placeholder="A/B/C/D" />
-          <label>Explanation</label><textarea id="qExplanation"></textarea>
-          <button class="btn primary full" id="btnSaveQuestion">Save Question</button>
-        </div>
-
-        <div class="card">
-          <h3>AI / Bulk Draft Import</h3>
-          <p class="muted">Paste extracted questions as JSON array for now. PDF/AI parser will be connected in Phase 3.</p>
-          <textarea id="draftJson" class="large-text" placeholder='[{"Question":"...","A":"...","B":"...","C":"...","D":"...","Answer":"A"}]'></textarea>
-          <button class="btn secondary full" id="btnSaveDrafts">Save to DRAFT_QUESTIONS</button>
-          <button class="btn ghost full" id="btnLoadDrafts">Load Drafts</button>
-          <div id="draftList" class="list"></div>
-        </div>
-
-        <div class="card">
-          <h3>Packages</h3>
-          <button class="btn secondary" id="btnLoadPackages">Load Packages</button>
-          <div id="packageList" class="list"></div>
-        </div>
-
-        <div class="card">
-          <h3>System Status</h3>
-          <button class="btn ghost" id="btnPingApi">Ping API</button>
-          <pre id="adminStatus" class="status-box"></pre>
-        </div>
+      <div class="admin-tabs">
+        <button class="admin-tab active" data-admin-tab="manualQuestionPanel">Manual Question</button>
+        <button class="admin-tab" data-admin-tab="draftQuestionPanel">Draft Review</button>
+        <button class="admin-tab" data-admin-tab="packagePanel">Packages</button>
+        <button class="admin-tab" data-admin-tab="systemPanel">System</button>
       </div>
+
+      <section id="manualQuestionPanel" class="admin-panel active">
+        <div class="grid two">
+          <div class="card">
+            <h3>Add Question</h3>
+            <div class="grid two compact-grid">
+              <div><label>Board</label><select id="adminBoardSelect"></select></div>
+              <div><label>Exam</label><select id="adminExamSelect"></select></div>
+              <div><label>Subject</label><select id="adminSubjectSelect"></select></div>
+              <div><label>Topic</label><select id="adminTopicSelect"></select></div>
+              <div><label>Difficulty</label><select id="qLevel"><option value="E">Easy</option><option value="M">Medium</option><option value="H">Hard</option></select></div>
+              <div><label>Language</label><select id="qLanguage"><option>Gujarati</option><option>English</option><option>Hindi</option></select></div>
+            </div>
+            <label>Question</label><textarea id="qText" placeholder="Enter question"></textarea>
+            <div class="grid two compact-grid">
+              <div><label>Option A</label><input id="qA" /></div>
+              <div><label>Option B</label><input id="qB" /></div>
+              <div><label>Option C</label><input id="qC" /></div>
+              <div><label>Option D</label><input id="qD" /></div>
+            </div>
+            <label>Correct Answer</label><select id="qAnswer"><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option></select>
+            <label>Explanation</label><textarea id="qExplanation" placeholder="Enter explanation"></textarea>
+            <button class="btn primary full" id="btnSaveQuestion">Save Question</button>
+          </div>
+          <div class="card">
+            <h3>Question Save Status</h3>
+            <p class="muted">After saving, generated Question_ID will appear here.</p>
+            <pre id="questionSaveStatus" class="status-box"></pre>
+            <div class="admin-note"><strong>Locked rule:</strong><p>Question ID is auto-generated by Apps Script. Do not enter manual Question_ID unless repairing old data.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="draftQuestionPanel" class="admin-panel">
+        <div class="grid two">
+          <div class="card">
+            <h3>AI / Bulk Draft Import</h3>
+            <p class="muted">Paste extracted questions as JSON array. They will be saved in DRAFT_QUESTIONS only.</p>
+            <div class="grid two compact-grid">
+              <div><label>Board</label><select id="draftBoardSelect"></select></div>
+              <div><label>Exam</label><select id="draftExamSelect"></select></div>
+              <div><label>Subject</label><select id="draftSubjectSelect"></select></div>
+              <div><label>Topic</label><select id="draftTopicSelect"></select></div>
+            </div>
+            <textarea id="draftJson" class="large-text" placeholder='[{"Question":"...","A":"...","B":"...","C":"...","D":"...","Answer":"A","Explanation":"..."}]'></textarea>
+            <button class="btn secondary full" id="btnSaveDrafts">Save to DRAFT_QUESTIONS</button>
+          </div>
+          <div class="card">
+            <h3>Pending Draft Questions</h3>
+            <button class="btn ghost full" id="btnLoadDrafts">Load Pending Drafts</button>
+            <div id="draftList" class="draft-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="packagePanel" class="admin-panel">
+        <div class="card"><h3>Packages</h3><button class="btn secondary" id="btnLoadPackages">Load Packages</button><div id="packageList" class="list"></div></div>
+      </section>
+      <section id="systemPanel" class="admin-panel">
+        <div class="card"><h3>System Status</h3><button class="btn ghost" id="btnPingApi">Ping API</button><pre id="adminStatus" class="status-box"></pre></div>
+      </section>
     </section>
   </main>
 
