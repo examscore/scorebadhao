@@ -582,3 +582,19 @@ textarea { min-height: 90px; resize: vertical; }
 @media (max-width: 820px) {
   .admin-tabs { display: grid; grid-template-columns: 1fr 1fr; }
 }
+/* ===== SCOREBADHAO PHASE 2.3 ADVANCED IMPORT ENGINE PATCH ===== */
+.import-mode-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.import-mode{border:1px solid var(--border);background:#fff;border-radius:999px;padding:10px 14px;font-weight:900;cursor:pointer}
+.import-mode.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.import-mode-panel{display:none}.import-mode-panel.active{display:block}
+.import-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.import-preview{display:grid;gap:12px}
+.preview-card{border:1px solid var(--border);border-radius:18px;padding:14px;background:#fff}
+.preview-card.valid{border-left:6px solid #22c55e}.preview-card.invalid{border-left:6px solid #ef4444}
+.preview-head{display:flex;justify-content:space-between;margin-bottom:8px}
+.import-errors{display:grid;gap:10px}
+.import-error-item{border:1px solid #fecaca;background:#fef2f2;border-radius:14px;padding:12px}
+.success-text{color:#15803d;font-weight:800}
+.placeholder-panel{border:1px dashed var(--border);border-radius:18px;background:#f8fafc;padding:18px}
+button:disabled{opacity:.55;cursor:not-allowed}
+@media (max-width:820px){.import-actions{display:grid}.import-mode-tabs{display:grid;grid-template-columns:1fr 1fr}}
